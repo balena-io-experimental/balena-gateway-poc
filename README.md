@@ -1,4 +1,4 @@
-### Resin Gateway POC
+# Resin Gateway POC
 
 ## Setup
 
