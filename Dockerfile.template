@@ -1,0 +1,18 @@
+FROM resin/%%RESIN_MACHINE_NAME%%-node:7-slim-20170623
+
+RUN apt-get update && \
+    apt-get install -qy \
+    curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src/app
+
+COPY package.json package.json
+
+RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean && rm -rf /tmp/*
+
+COPY . ./
+
+ENV INITSYSTEM=on
+
+CMD ["bash", "start.sh"]
